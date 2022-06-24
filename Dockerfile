@@ -1,4 +1,5 @@
-FROM java:8
+FROM openjdk:8-jdk-alpine
 EXPOSE 8080
-ADD /target/BitcoinPriceIndex-1.0-SNAPSHOT-jar-with-dependencies.jar BitcoinPriceIndex-1.0-SNAPSHOT-jar-with-dependencies.jar
-ENTRYPOINT ["java","-jar","BitcoinPriceIndex-1.0-SNAPSHOT-jar-with-dependencies.jar"]
+ARG JAR_FILE=target/bitcoin-info-0.0.1-SNAPSHOT.jar
+ADD ${JAR_FILE} app.jar
+ENTRYPOINT ["java","-jar","app.jar"]
