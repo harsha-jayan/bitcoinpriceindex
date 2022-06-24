@@ -1,24 +1,19 @@
 package com.edigital.currency.bitcoininfo.dto;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.Map;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Root{
+public class HistoricPriceRoot {
 
-    private Bpi bpi;
+    Map<String, Object> bpi;
 
-    public Bpi getBpi() {
+    public Map<String, Object> getBpi() {
         return bpi;
     }
 
-    public void setBpi(Bpi bpi) {
+    public void setBpi(Map<String, Object> bpi) {
         this.bpi = bpi;
     }
 }
-
-
-
-
-
-

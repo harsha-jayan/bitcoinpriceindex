@@ -1,6 +1,7 @@
 package com.edigital.currency.bitcoininfo.client;
 
 import com.edigital.currency.bitcoininfo.dto.Bpi;
+import com.edigital.currency.bitcoininfo.dto.HistoricPriceRoot;
 import com.edigital.currency.bitcoininfo.dto.Root;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -10,6 +11,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 @Component
 public class BitCoinInfoClient {
@@ -22,7 +26,7 @@ public class BitCoinInfoClient {
     @Value("${bpiHistoricRatesApi}")
     String bpiHistoricRatesUrl;
 
-    public void consumeHistoricalRates(String currency) throws JsonProcessingException {
+    public List<Double> consumeHistoricalRates(String currency) throws JsonProcessingException {
         String endDate = LocalDate.now().toString();
         String startDate = LocalDate.now().minusDays(30).toString();
         String uri = bpiHistoricRatesUrl+"start="+startDate+"&end="+endDate+"&currency="+currency;
@@ -33,8 +37,16 @@ public class BitCoinInfoClient {
         log.debug("Successfully made call to the external api to fetch historic BTC prices");
         ObjectMapper om = new ObjectMapper();
 
-/*        JSONPObject bpiObject = new JSONPObject(json).getFunction().
-        JSONPObject root = om.readValue(json, JSONPObject.class);*/
+        HistoricPriceRoot root = om.readValue(json, HistoricPriceRoot.class);
+        List<Double> monthlyBtcRates = new ArrayList<>();
+
+        for (Map.Entry<String, Object> i :
+                root.getBpi().entrySet()) {
+            monthlyBtcRates.add((Double) i.getValue());
+        }
+        monthlyBtcRates.sort(Double::compareTo);
+
+        return monthlyBtcRates;
     }
 
     public float getCurrentRate(String currency) throws JsonProcessingException {

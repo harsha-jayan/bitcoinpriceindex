@@ -1,10 +1,10 @@
 package com.edigital.currency.bitcoininfo.dto;
 
 public class Currency {
-    public String code;
-    public String rate;
-    public String description;
-    public float rate_float;
+    private String code;
+    private String rate;
+    private String description;
+    private float rate_float;
 
     public String getCode() {
         return code;

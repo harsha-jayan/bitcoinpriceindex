@@ -13,6 +13,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>bitcoin-info</name>
 	<description>Demo project about bit coin conversion</description>
+	<packaging>jar</packaging>
 	<properties>
 		<java.version>18</java.version>
 	</properties>

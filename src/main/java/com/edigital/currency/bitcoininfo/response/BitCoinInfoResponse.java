@@ -3,8 +3,24 @@ package com.edigital.currency.bitcoininfo.response;
 public class BitCoinInfoResponse {
 
     private float currentRate;
-    private float lowestRate;
-    private float highestRate;
+    private double lowestRate;
+    private double highestRate;
+
+    public double getLowestRate() {
+        return lowestRate;
+    }
+
+    public void setLowestRate(double lowestRate) {
+        this.lowestRate = lowestRate;
+    }
+
+    public double getHighestRate() {
+        return highestRate;
+    }
+
+    public void setHighestRate(double highestRate) {
+        this.highestRate = highestRate;
+    }
 
     public float getCurrentRate() {
         return currentRate;
@@ -14,16 +30,8 @@ public class BitCoinInfoResponse {
         this.currentRate = currentRate;
     }
 
-    public float getLowestRate() {
-        return lowestRate;
-    }
-
     public void setLowestRate(float lowestRate) {
         this.lowestRate = lowestRate;
-    }
-
-    public float getHighestRate() {
-        return highestRate;
     }
 
     public void setHighestRate(float highestRate) {

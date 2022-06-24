@@ -1,6 +1,5 @@
 package com.edigital.currency.bitcoininfo.dto;
 
-import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -15,10 +14,12 @@ public class Bpi {
         @JsonProperty("GBP")
         private Currency gbp;
 
+        @JsonProperty("INR")
+        private Currency inr;
+
         public Currency getUsd() {
                 return usd;
         }
-
         public void setUsd(Currency usd) {
                 this.usd = usd;
         }
@@ -46,7 +47,4 @@ public class Bpi {
         public void setInr(Currency inr) {
                 this.inr = inr;
         }
-
-        @JsonProperty("INR")
-        private Currency inr;
 }

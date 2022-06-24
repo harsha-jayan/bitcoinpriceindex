@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class BitCoinInfoService {
 
@@ -19,9 +21,11 @@ public class BitCoinInfoService {
     public BitCoinInfoResponse getDetails(String currency){
         try {
             float currentRate = client.getCurrentRate(currency);
-            client.consumeHistoricalRates(currency);
+            List<Double> monthlyBTCRates = client.consumeHistoricalRates(currency);
             BitCoinInfoResponse response = new BitCoinInfoResponse();
             response.setCurrentRate(currentRate);
+            response.setHighestRate(monthlyBTCRates.get(monthlyBTCRates.size()-1));
+            response.setLowestRate(monthlyBTCRates.get(0));
             return response;
 
         } catch (JsonProcessingException e) {
